@@ -1,36 +1,56 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# TheQBarber
 
-## Getting Started
+**Smart Queue & Appointment Booking System for Barbershops**  
+_No more waiting around. Just smooth cuts._
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 📌 Overview
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+**TheQBarber** is a digital solution that helps barbershops manage their walk-ins and appointments with ease. It lets customers join the queue online, view live wait times, and get notified when it’s their turn — all without needing to download an app.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+For barbers and shop owners, it provides a simple dashboard to keep track of customers, reduce wait-time complaints, and run the shop more efficiently.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## ✅ Key Features
 
-To learn more about Next.js, take a look at the following resources:
+### For Customers:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Join the queue remotely from any device
+- See how many people are ahead of them
+- Get real-time notifications when it's their turn
+- Book appointments in advance
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### For Barbershops:
 
-## Deploy on Vercel
+- Manage walk-ins and appointments in one place
+- View and control the live queue (Next, Skip, Complete)
+- Set working hours and break times
+- Improve customer satisfaction and reduce in-shop crowding
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🛠️ How It Works
+
+1. Customers visit the site and join the queue or book an appointment.
+2. The shop admin (barber) sees the updated list in a dashboard.
+3. As the barber serves customers, they mark them as "next" or "complete".
+4. The next customer is automatically notified when it’s their turn.
+
+---
+
+## 📲 No App Required
+
+TheQBarber runs entirely in the browser — optimized for both mobile and desktop — making it fast and accessible for all users.
+
+---
+
+## 📞 Contact & Info
+
+- **Website:** theqbarber.in
+- **Email:** theqbarber@gmail.com
+
+---
+
+> “Your time matters. So does your customer’s.” – _TheQBarber_
