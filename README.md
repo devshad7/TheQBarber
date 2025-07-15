@@ -48,7 +48,7 @@ TheQBarber runs entirely in the browser — optimized for both mobile and deskto
 
 ## 📞 Contact & Info
 
-- **Website:** theqbarber.in
+- **Website:** [theqbarber.in](https://theqbarber.in)
 - **Email:** theqbarber@gmail.com
 
 ---
