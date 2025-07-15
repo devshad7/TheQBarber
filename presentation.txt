@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TheQBarber Presentation</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Custom styles for the presentation */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #121212; /* Deeper dark background */
+            color: #e0e0e0; /* Softer light text color */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            overflow: hidden; /* Hide scrollbars */
+        }
+        .presentation-container {
+            width: 100%;
+            max-width: 1280px; /* Slightly wider for more elegance */
+            aspect-ratio: 16 / 9; /* Standard presentation aspect ratio */
+            background-color: #1e1e1e; /* Slightly lighter dark for slides */
+            box-shadow: 0 15px 30px -5px rgba(0, 0, 0, 0.6), 0 8px 15px -5px rgba(0, 0, 0, 0.5);
+            border-radius: 1.25rem; /* Slightly more rounded */
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+        .slide {
+            width: 100%;
+            height: 100%;
+            display: none; /* Hidden by default */
+            padding: 4rem 6rem; /* Increased padding for more white space */
+            box-sizing: border-box;
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            transition: opacity 0.6s ease-in-out; /* Slightly slower transition */
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            text-align: center;
+        }
+        .slide.active {
+            display: flex; /* Active slide is visible */
+            opacity: 1;
+        }
+        .slide-title {
+            font-size: 4rem; /* Larger title */
+            font-weight: 700; /* Bold, but not extra bold */
+            margin-bottom: 2.5rem; /* More space below title */
+            color: #4db6ac; /* Muted teal accent for titles */
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+        }
+        .slide-subtitle {
+            font-size: 2.8rem; /* Slightly larger subtitle */
+            font-weight: 500;
+            margin-bottom: 2rem;
+            color: #80cbc4; /* Lighter muted teal */
+        }
+        .tagline {
+            font-size: 2rem;
+            font-weight: 400; /* Lighter weight for elegance */
+            color: #b0b0b0;
+            margin-top: 1.5rem;
+        }
+        .slide-content {
+            font-size: 1.6rem; /* Slightly larger content text */
+            line-height: 1.7;
+            max-width: 75%; /* Narrower for better readability */
+            margin: 0 auto;
+        }
+        .slide-content ul {
+            list-style: none;
+            padding: 0;
+            text-align: left;
+            margin: 0 auto;
+        }
+        .slide-content ul li {
+            margin-bottom: 1.5rem; /* More spacing between list items */
+            display: flex;
+            align-items: center;
+            gap: 1.2rem; /* More space between icon and text */
+        }
+        .slide-content ul li i {
+            color: #4db6ac; /* Muted teal icon color */
+            font-size: 2rem; /* Slightly larger icons */
+            min-width: 2.2rem; /* Ensure consistent icon spacing */
+        }
+        .navigation-buttons {
+            position: absolute;
+            bottom: 2.5rem; /* Slightly lower */
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 2rem; /* More space between buttons */
+            z-index: 10;
+        }
+        .nav-button {
+            background-color: #3f51b5; /* Deeper navy blue for buttons */
+            color: white;
+            padding: 1rem 2.5rem; /* Larger padding */
+            border-radius: 0.75rem;
+            font-size: 1.3rem; /* Slightly larger font */
+            font-weight: 600; /* Medium bold */
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Softer shadow */
+            border: none; /* Remove default border */
+        }
+        .nav-button:hover {
+            background-color: #303f9f; /* Darker navy on hover */
+            transform: translateY(-3px); /* More pronounced lift */
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+        }
+        .nav-button:disabled {
+            background-color: #424242; /* Darker disabled color */
+            color: #9e9e9e;
+            cursor: not-allowed;
+            box-shadow: none;
+            transform: none;
+        }
+
+        /* Specific slide adjustments */
+        #slide1 {
+            background-image: url('https://placehold.co/1280x720/121212/e0e0e0?text=Modern+Barbershop+Background'); /* Updated placeholder size */
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            color: white;
+            text-shadow: 1px 1px 5px rgba(0,0,0,0.8); /* Stronger text shadow for readability */
+        }
+        #slide1::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to bottom, rgba(18, 18, 18, 0.6), rgba(18, 18, 18, 0.9)); /* Adjusted overlay opacity */
+            z-index: 1;
+        }
+        #slide1 > * {
+            z-index: 2;
+            position: relative;
+        }
+        .logo-placeholder {
+            font-size: 6rem; /* Larger logo icon */
+            color: #4db6ac;
+            margin-bottom: 1.5rem;
+        }
+
+        #slide6 .step-container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 3rem; /* Increased gap */
+            margin-top: 3.5rem;
+        }
+        #slide6 .step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 220px; /* Slightly wider step boxes */
+            text-align: center;
+            padding: 1.5rem; /* Added padding */
+            border-radius: 0.75rem;
+            background-color: #2a2a2a; /* Subtle background for steps */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+        #slide6 .step-icon {
+            font-size: 3.5rem; /* Larger icons */
+            color: #4db6ac;
+            margin-bottom: 1.2rem;
+        }
+        #slide6 .step-number {
+            font-size: 3rem; /* Larger number */
+            font-weight: 700;
+            color: #3f51b5; /* Navy for numbers */
+            margin-bottom: 0.8rem;
+        }
+        #slide6 .step-text {
+            font-size: 1.3rem; /* Slightly larger text */
+            color: #b0b0b0;
+        }
+
+        #slide7 .columns-container {
+            display: flex;
+            justify-content: space-around;
+            gap: 4rem; /* Increased gap between columns */
+            width: 100%;
+            margin-top: 2.5rem;
+        }
+        #slide7 .column {
+            flex: 1;
+            text-align: left;
+            padding: 2rem; /* Increased padding */
+            background-color: #2a2a2a; /* Consistent background */
+            border-radius: 1.25rem; /* More rounded */
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+        }
+        #slide7 .column-title {
+            font-size: 2.2rem; /* Slightly larger column title */
+            font-weight: 600;
+            color: #4db6ac;
+            margin-bottom: 1.8rem;
+            text-align: center;
+        }
+        #slide7 .column ul li {
+            font-size: 1.4rem; /* Slightly larger list items */
+            margin-bottom: 1.2rem;
+        }
+
+        #slide8 .contact-info {
+            margin-top: 2.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.8rem; /* More space between contact lines */
+            font-size: 1.8rem; /* Larger contact text */
+            font-weight: 500;
+        }
+        #slide8 .contact-info span {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem; /* More space between icon and text */
+        }
+        #slide8 .contact-info i {
+            color: #4db6ac;
+            font-size: 2.2rem; /* Larger icons */
+        }
+        .qr-code-placeholder {
+            width: 180px; /* Larger QR code placeholder */
+            height: 180px;
+            background-color: #e0e0e0;
+            border-radius: 0.75rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #1e1e1e;
+            font-size: 1rem;
+            text-align: center;
+            margin-top: 2.5rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+        .request-demo-button {
+            background-color: #4db6ac; /* Muted teal accent for CTA button */
+            color: #121212;
+            padding: 1.4rem 3.5rem; /* Larger padding for button */
+            border-radius: 1rem; /* More rounded */
+            font-size: 2rem; /* Larger font */
+            font-weight: 700;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5); /* Stronger, softer shadow */
+            margin-top: 3rem; /* More space above button */
+            display: inline-block;
+            text-decoration: none;
+            border: none;
+        }
+        .request-demo-button:hover {
+            background-color: #388e8e; /* Darker teal on hover */
+            transform: translateY(-4px); /* More pronounced lift */
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.6);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="presentation-container">
+        <!-- Slide 1: Title Slide -->
+        <div id="slide1" class="slide active">
+            <div class="logo-placeholder">
+                <i class="fas fa-cut"></i>
+            </div>
+            <h1 class="slide-title">TheQBarber</h1>
+            <h2 class="slide-subtitle">Smart Queue & Booking System for Barbershops</h2>
+            <p class="tagline">💈 No More Waiting Around. Just Smooth Cuts.</p>
+        </div>
+
+        <!-- Slide 2: Problem -->
+        <div id="slide2" class="slide">
+            <h2 class="slide-title">The Problem</h2>
+            <div class="slide-content">
+                <ul>
+                    <li><i class="fas fa-hourglass-half"></i> Long waiting times frustrate customers</li>
+                    <li><i class="fas fa-clipboard-list"></i> Barbers waste time managing the queue manually</li>
+                    <li><i class="fas fa-times-circle"></i> No clear system = lost clients</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 3: The Solution -->
+        <div id="slide3" class="slide">
+            <h2 class="slide-title">TheQBarber – How It Helps</h2>
+            <div class="slide-content">
+                <ul>
+                    <li><i class="fas fa-mobile-alt"></i> Queue from your phone</li>
+                    <li><i class="fas fa-clock"></i> Live wait time updates</li>
+                    <li><i class="fas fa-bell"></i> Turn notifications</li>
+                    <li><i class="fas fa-calendar-alt"></i> Easy appointment booking</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 4: For Customers -->
+        <div id="slide4" class="slide">
+            <h2 class="slide-title">Why Customers Love It</h2>
+            <div class="slide-content">
+                <ul>
+                    <li><i class="fas fa-check-circle"></i> Join the queue from your phone</li>
+                    <li><i class="fas fa-check-circle"></i> Know how long the wait is</li>
+                    <li><i class="fas fa-check-circle"></i> Get notified when it’s your turn</li>
+                    <li><i class="fas fa-check-circle"></i> Book future appointments with ease</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 5: For Barbershops -->
+        <div id="slide5" class="slide">
+            <h2 class="slide-title">Why Barbershops Need It</h2>
+            <div class="slide-content">
+                <ul>
+                    <li><i class="fas fa-bullseye"></i> Manage walk-ins & appointments</li>
+                    <li><i class="fas fa-mobile-alt"></i> Tap to move to next customer</li>
+                    <li><i class="fas fa-spa"></i> Calm, professional shop environment</li>
+                    <li><i class="fas fa-comments-slash"></i> Fewer interruptions and complaints</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 6: How It Works -->
+        <div id="slide6" class="slide">
+            <h2 class="slide-title">Simple 4-Step Process</h2>
+            <div class="step-container">
+                <div class="step">
+                    <div class="step-icon"><i class="fas fa-globe"></i></div>
+                    <div class="step-number">1.</div>
+                    <div class="step-text">Customers visit [Your Website URL]</div>
+                </div>
+                <div class="step">
+                    <div class="step-icon"><i class="fas fa-users"></i></div>
+                    <div class="step-number">2.</div>
+                    <div class="step-text">Join the queue or book a time slot</div>
+                </div>
+                <div class="step">
+                    <div class="step-icon"><i class="fas fa-desktop"></i></div>
+                    <div class="step-number">3.</div>
+                    <div class="step-text">You see them in your dashboard</div>
+                </div>
+                <div class="step">
+                    <div class="step-icon"><i class="fas fa-bell"></i></div>
+                    <div class="step-number">4.</div>
+                    <div class="step-text">They get notified when it’s their turn</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 7: Benefits Summary -->
+        <div id="slide7" class="slide">
+            <h2 class="slide-title">Why Choose TheQBarber</h2>
+            <div class="columns-container">
+                <div class="column">
+                    <h3 class="column-title">For Customers</h3>
+                    <ul>
+                        <li><i class="fas fa-hand-point-right"></i> Convenience at their fingertips</li>
+                        <li><i class="fas fa-hand-point-right"></i> Predictable wait times</li>
+                        <li><i class="fas fa-hand-point-right"></i> No more physical waiting</li>
+                        <li><i class="fas fa-hand-point-right"></i> Easy scheduling</li>
+                    </ul>
+                </div>
+                <div class="column">
+                    <h3 class="column-title">For Barbershops</h3>
+                    <ul>
+                        <li><i class="fas fa-hand-point-right"></i> Streamlined operations</li>
+                        <li><i class="fas fa-hand-point-right"></i> Increased efficiency</li>
+                        <li><i class="fas fa-hand-point-right"></i> Enhanced customer experience</li>
+                        <li><i class="fas fa-hand-point-right"></i> Professional image</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 8: Call to Action -->
+        <div id="slide8" class="slide">
+            <h2 class="slide-title">Get Started Today</h2>
+            <div class="contact-info">
+                <span><i class="fas fa-globe"></i> Website: [yourdomain.com]</span>
+                <span><i class="fas fa-phone-alt"></i> Phone: [Your Phone or WhatsApp]</span>
+                <span><i class="fas fa-envelope"></i> Email: [Your Email]</span>
+            </div>
+            <div class="qr-code-placeholder">
+                QR Code Placeholder<br>(Replace with actual QR)
+            </div>
+            <a href="#" class="request-demo-button">Request Demo</a>
+        </div>
+
+        <!-- Slide 9: Thank You Slide -->
+        <div id="slide9" class="slide">
+            <h2 class="slide-title">Thanks for Your Time!</h2>
+            <h3 class="slide-subtitle">Let’s make barbering smarter together.</h3>
+            <div class="contact-info">
+                <span><i class="fas fa-globe"></i> Website: [yourdomain.com]</span>
+                <span><i class="fas fa-phone-alt"></i> Phone: [Your Phone or WhatsApp]</span>
+                <span><i class="fas fa-envelope"></i> Email: [Your Email]</span>
+            </div>
+        </div>
+
+        <!-- Navigation Buttons -->
+        <div class="navigation-buttons">
+            <button id="prevBtn" class="nav-button">Previous</button>
+            <button id="nextBtn" class="nav-button">Next</button>
+        </div>
+    </div>
+
+    <script>
+        const slides = document.querySelectorAll('.slide');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        let currentSlideIndex = 0;
+
+        // Function to show a specific slide
+        function showSlide(index) {
+            // Hide all slides
+            slides.forEach((slide, i) => {
+                slide.classList.remove('active');
+            });
+
+            // Show the current slide
+            slides[index].classList.add('active');
+
+            // Update button states
+            prevBtn.disabled = (index === 0);
+            nextBtn.disabled = (index === slides.length - 1);
+        }
+
+        // Event listeners for navigation buttons
+        nextBtn.addEventListener('click', () => {
+            if (currentSlideIndex < slides.length - 1) {
+                currentSlideIndex++;
+                showSlide(currentSlideIndex);
+            }
+        });
+
+        prevBtn.addEventListener('click', () => {
+            if (currentSlideIndex > 0) {
+                currentSlideIndex--;
+                showSlide(currentSlideIndex);
+            }
+        });
+
+        // Initialize the presentation on window load
+        window.onload = function() {
+            showSlide(currentSlideIndex);
+        };
+    </script>
+</body>
+</html>
