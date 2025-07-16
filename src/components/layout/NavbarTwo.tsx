@@ -4,8 +4,12 @@ import LogoDark from "../../../public/assets/logos/logo__dark.svg";
 import { Button } from "@/components/ui/button";
 import { Sun } from "lucide-react";
 import Link from "next/link";
+import { currentUser } from "@clerk/nextjs/server";
+import { SignOutButton } from "@clerk/nextjs";
 
-const NavbarTwo = () => {
+const NavbarTwo = async () => {
+  const user = await currentUser();
+
   return (
     <>
       <nav className="border-b border-gray-100">
@@ -21,12 +25,14 @@ const NavbarTwo = () => {
           </div>
           <div className="flex items-center gap-4">
             <div className="hidden md:block">
-              <p className="text-balance text-sm">Welcome, The Unisex Saloon</p>
+              <p className="text-balance text-sm">Welcome, {user?.fullName}</p>
             </div>
             <Button variant={"outline"} className="cursor-pointer">
               <Sun />
             </Button>
-            <Button className="cursor-pointer bg-[#363636]">Signout</Button>
+            <SignOutButton>
+              <Button className="cursor-pointer bg-[#363636]">Signout</Button>
+            </SignOutButton>
           </div>
         </div>
       </nav>
