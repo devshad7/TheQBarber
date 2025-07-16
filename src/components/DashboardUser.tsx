@@ -1,7 +1,6 @@
 import React from "react";
 import { Button } from "./ui/button";
-import { RefreshCcw, Scissors, Users } from "lucide-react";
-import QueueCard from "./ui/QueueCard";
+import { RefreshCcw, Scissors } from "lucide-react";
 import { Card, CardContent } from "./ui/card";
 
 const DashboardUser = () => {
