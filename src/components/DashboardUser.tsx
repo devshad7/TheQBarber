@@ -17,14 +17,16 @@ const DashboardUser = () => {
   const [loading, setLoading] = useState<boolean>(true);
 
   // fetch shops functions
-  const fetchNearbyShops = async () => {
+  const fetchNearbyShops = async (positionArg?: GeolocationPosition) => {
     setLoading(true);
     setShopData([]);
     try {
-      const position = await new Promise<GeolocationPosition>(
-        (resolve, reject) =>
+      let position = positionArg;
+      if (!position) {
+        position = await new Promise<GeolocationPosition>((resolve, reject) =>
           navigator.geolocation.getCurrentPosition(resolve, reject)
-      );
+        );
+      }
       setIsLocationPermissionAllowed(true);
       const userLat = position.coords.latitude;
       const userLng = position.coords.longitude;
@@ -57,13 +59,14 @@ const DashboardUser = () => {
     fetchNearbyShops();
   }, []);
 
+  // re-request for location permission when permission is not granted
   const requestLocationPermission = () => {
     if (typeof window !== "undefined" && "geolocation" in navigator) {
       setLoading(true);
       navigator.geolocation.getCurrentPosition(
-        () => {
+        (position) => {
           setIsLocationPermissionAllowed(true);
-          fetchNearbyShops();
+          fetchNearbyShops(position);
         },
         (error) => {
           setIsLocationPermissionAllowed(false);
@@ -75,7 +78,7 @@ const DashboardUser = () => {
     }
   };
 
-  // Optional: Handler for manual refresh
+  // handler for smanual refresh
   const handleRefresh = () => {
     fetchNearbyShops();
   };
