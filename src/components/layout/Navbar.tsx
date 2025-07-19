@@ -2,7 +2,7 @@ import Image from "next/image";
 import React from "react";
 import LogoDark from "../../../public/assets/logos/logo__dark.svg";
 import { Button } from "@/components/ui/button";
-import { Sun } from "lucide-react";
+// import { Sun } from "lucide-react";
 import Link from "next/link";
 import { currentUser } from "@clerk/nextjs/server";
 import { SignOutButton } from "@clerk/nextjs";
@@ -29,9 +29,9 @@ const Navbar = async () => {
                 Welocme, Mr. {user?.fullName}
               </p>
             </div>
-            <Button variant={"outline"} className="cursor-pointer">
+            {/* <Button variant={"outline"} className="cursor-pointer">
               <Sun />
-            </Button>
+            </Button> */}
             <SignOutButton>
               <Button className="cursor-pointer bg-[#363636]">Signout</Button>
             </SignOutButton>
