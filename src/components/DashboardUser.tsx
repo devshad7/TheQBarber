@@ -48,6 +48,7 @@ const DashboardUser = () => {
         .filter((shop) => shop && shop.distance <= 1);
 
       setShopData(nearbyShops);
+      // console.log(nearbyShops);
     } catch (err) {
       setIsLocationPermissionAllowed(false);
       setShopData([]);
