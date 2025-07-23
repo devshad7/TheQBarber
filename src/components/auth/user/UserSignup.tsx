@@ -94,7 +94,7 @@ const UserSignup = () => {
     setError("");
 
     try {
-      await signUp.preparePhoneNumberVerification({ strategy: "phone_code" });
+      await signUp.prepareEmailAddressVerification({ strategy: "email_code" });
     } catch (err: any) {
       const message =
         err?.errors?.[0]?.message ||

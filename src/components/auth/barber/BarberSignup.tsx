@@ -83,7 +83,7 @@ const BarberSignup = () => {
           role: "barber",
           location: {
             latitude: latitude,
-            longtitude: longtitude,
+            longitude: longtitude,
           },
           createdAt: new Date().toISOString(),
         });

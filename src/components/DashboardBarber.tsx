@@ -1,9 +1,38 @@
-import React from "react";
+"use client";
+
+import React, { useEffect, useState } from "react";
 import { Button } from "./ui/button";
 import { Plus, RefreshCcw, Users } from "lucide-react";
 import QueueCardBarber from "./ui/QueueCardBarber";
+import { db } from "@/config/firebase.config";
+import { collection, onSnapshot } from "firebase/firestore";
+import { useUser } from "@clerk/nextjs";
 
 const DashboardBarber = () => {
+  const { user } = useUser();
+  const [totalWaitTime, setTotalWaitTime] = useState<number>(0);
+  const [totalCustomerWaiting, setTotalCustomerWaiting] = useState<number>(0);
+
+  useEffect(() => {
+    if (!user) return;
+
+    const ref = collection(db, "shops", user.id, "queues");
+    const unsubscribe = onSnapshot(ref, (snapshot) => {
+      setTotalCustomerWaiting(snapshot.size);
+      let totalEstTime = 0;
+      snapshot.forEach((docs) => {
+        const data = docs.data();
+        const time =
+          typeof data.estTime === "string" ? parseInt(data.estTime, 10) : 0;
+        totalEstTime += isNaN(time) ? 0 : time;
+      });
+      setTotalWaitTime(totalEstTime);
+      // console.log(totalEstTime);
+    });
+
+    return () => unsubscribe();
+  }, [user]);
+
   return (
     <>
       <main className="max-w-7xl mx-auto py-5 px-5">
@@ -11,7 +40,7 @@ const DashboardBarber = () => {
           <div className="">
             <h1 className="text-xl md:text-2xl font-semibold">Your Queue</h1>
             <p className="text-gray-600 text-sm md:text-base text-balance">
-              0 customers waiting
+              {totalCustomerWaiting} customers waiting
             </p>
           </div>
           <div className="flex items-center gap-2 md:gap-4">
@@ -34,7 +63,7 @@ const DashboardBarber = () => {
               <div className="">
                 <h2>Total Wait Time</h2>
                 <span className="text-xl font-semibold text-green-600">
-                  0 min
+                  {totalWaitTime} min
                 </span>
               </div>
             </div>
