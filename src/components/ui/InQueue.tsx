@@ -73,7 +73,7 @@ const InQueue = ({
         </div>
         <h2 className="text-2xl font-semibold text-balance">
           {position === 1
-            ? `Your turn! You're ${getOrdinal(position)} in line.`
+            ? `It's your turn! You're ${getOrdinal(position)} in line.`
             : `Almost there! You're ${getOrdinal(position)} in line.`}
         </h2>
         <div className="flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-muted-foreground bg-muted/50 px-3 py-1.5 rounded-full text-sm">
