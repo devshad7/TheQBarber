@@ -12,9 +12,9 @@ import Link from "next/link";
 
 const Home = () => {
   return (
-    <main className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
+    <main className="min-h-screen flex items-center justify-center px-4">
       <div className="grid md:grid-cols-2 gap-6 max-w-3xl w-full">
-        <Card className="text-left bg-white">
+        <Card className="text-left">
           <CardHeader>
             <User className="h-8 w-8 text-blue-600 mb-2" />
             <CardTitle className="text-2xl font-bold">I'm a Customer</CardTitle>
@@ -31,7 +31,7 @@ const Home = () => {
           </CardContent>
         </Card>
 
-        <Card className="text-left bg-white">
+        <Card className="text-left">
           <CardHeader>
             <Scissors className="h-8 w-8 text-green-600 mb-2" />
             <CardTitle className="text-2xl font-bold">I'm a Barber</CardTitle>
