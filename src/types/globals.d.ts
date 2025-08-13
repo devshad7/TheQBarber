@@ -1,5 +1,6 @@
 export {};
 
+// Create a type for the roles
 export type Roles = "user" | "barber";
 
 declare global {
