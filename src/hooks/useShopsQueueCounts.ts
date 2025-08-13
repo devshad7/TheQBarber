@@ -15,7 +15,7 @@ function useShopQueues(shopIds: string[], userId: string | undefined) {
   useEffect(() => {
     const fetchQueues = async () => {
       const result: { [shopId: string]: QueueInfo } = {};
-      for (let shopId of shopIds) {
+      for (const shopId of shopIds) {
         const queuesRef = collection(db, "shops", shopId, "queues");
         const snapshot = await getDocs(queuesRef);
 
