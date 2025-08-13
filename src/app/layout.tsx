@@ -6,6 +6,7 @@ export const metadata: Metadata = {
   title: "TheQBarber | Smart Queue & Appointment System for Barbershops",
   description:
     "TheQBarber is an online barber queue and appointment booking system. Manage walk-ins, reduce wait times, and streamline your barbershop experience.",
+    manifest: "/manifest.json",
 };
 
 export default function RootLayout({
