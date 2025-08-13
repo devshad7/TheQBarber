@@ -61,7 +61,7 @@ const InQueue = ({
       <CardHeader className="flex flex-row items-start justify-between">
         <div>
           <CardTitle className="text-2xl font-bold">
-            You're in the Queue!
+            You&apos;re in the Queue!
           </CardTitle>
           <CardDescription>{shopName}</CardDescription>
         </div>
