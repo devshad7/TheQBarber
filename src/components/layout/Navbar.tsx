@@ -1,42 +1,65 @@
-import Image from "next/image";
-import React from "react";
-import LogoDark from "../../../public/assets/logos/logo__dark.svg";
-import { Button } from "@/components/ui/button";
-// import { Sun } from "lucide-react";
-import Link from "next/link";
-import { SignOutButton } from "@clerk/nextjs";
-import type { UserResource } from "@clerk/types";
+"use client"
 
-interface NavbarPageProps {
-  user: UserResource | null | undefined;
-}
+import React, { useEffect, useState } from "react";
+import { Bell, MapPin } from "lucide-react";
+import { useUser } from "@clerk/nextjs";
 
-const Navbar = ({ user }: NavbarPageProps) => {
+const Navbar = () => {
+  const { user } = useUser();
+  const [location, setLocation] = useState("Loading...");
+  const [greeting, setGreeting] = useState("Morning");
+
+  useEffect(() => {
+    const hour = new Date().getHours();
+    if (hour >= 5 && hour < 12) setGreeting("Morning");
+    else if (hour >= 12 && hour < 17) setGreeting("Afternoon");
+    else if (hour >= 17 && hour < 21) setGreeting("Evening");
+    else setGreeting("Night");
+  }, []);
+
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition(
+      async (pos) => {
+        const { latitude, longitude } = pos.coords;
+
+        try {
+          const res = await fetch(
+            `https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json`
+          );
+          const data = await res.json();
+
+          if (data.address) {
+            const city = data.address.county;
+            const district = data.address.state_district;
+            setLocation(`${city}, ${district}`);
+          } else {
+            setLocation("Unknown location");
+          }
+        } catch {
+          setLocation("Error fetching location");
+        }
+      },
+      () => {
+        setLocation("Permission denied");
+      }
+    );
+  }, []);
   return (
     <>
-      <nav className="border-b border-gray-100">
-        <div className="flex justify-between items-center max-w-7xl mx-auto py-4 px-5">
+      <nav className="md:border-b md:border-gray-100">
+        <div className="flex justify-between items-center max-w-7xl mx-auto py-5 px-5">
           <div className="">
-            <Link href={"/"}>
-              <Image
-                src={LogoDark}
-                alt="logo"
-                className="w-auto h-10 md:h-12"
-              />
-            </Link>
+            <h1 className="text-lg font-semibold">
+              {greeting}, {user?.fullName}
+            </h1>
+            <p className="text-sm text-gray-600">
+              <MapPin size={18} className="inline-block" /> {location}
+            </p>
           </div>
-          <div className="flex items-center gap-4">
-            <div className="hidden md:block">
-              <p className="text-balance text-sm">
-                Welocme, Mr. {user?.fullName}
-              </p>
+          <div className="">
+            <div className="bg-gray-50 border border-gray-200 p-2 rounded-full">
+              <Bell />
             </div>
-            {/* <Button variant={"outline"} className="cursor-pointer">
-              <Sun />
-            </Button> */}
-            <SignOutButton>
-              <Button className="cursor-pointer bg-[#363636]">Signout</Button>
-            </SignOutButton>
           </div>
         </div>
       </nav>
