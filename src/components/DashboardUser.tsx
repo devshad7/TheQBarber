@@ -9,7 +9,6 @@ import { collection, getDocs } from "firebase/firestore";
 import { db } from "@/config/firebase.config";
 import getShopDistance from "@/utils/get-shop-distance";
 import { ShopDataProps } from "@/types/shop_data";
-import Navbar from "./layout/Navbar";
 
 const DashboardUser = () => {
   const [shopData, setShopData] = useState<ShopDataProps[]>([]);

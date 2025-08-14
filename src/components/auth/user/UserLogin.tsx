@@ -14,9 +14,8 @@ const UserLogin = () => {
   const { isLoaded, signIn, setActive } = useSignIn();
   const router = useRouter();
 
-  // Capture the 'redirect_url' query parameter
   const searchParams = useSearchParams();
-  const redirectUrl = searchParams.get("redirect_url") || "/";
+  // const redirectUrl = searchParams.get("redirect_url") || "/";
 
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
@@ -54,7 +53,7 @@ const UserLogin = () => {
 
       if (result.status === "complete") {
         await setActive({ session: result.createdSessionId });
-        router.push(redirectUrl);
+        router.push("/");
       } else {
         setError("OTP verification incomplete.");
       }
@@ -135,7 +134,7 @@ const UserLogin = () => {
           <div className="text-center text-sm">
             Don&apos;t have an account?{" "}
             <Link
-              href="/auth/sign-up?redirect_url=http%3A%2F%2Flocalhost%3A3000%2Fdashboard%2Fuser"
+              href="/auth/sign-up?user"
               className="underline underline-offset-4"
             >
               Sign up

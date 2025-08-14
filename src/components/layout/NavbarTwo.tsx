@@ -4,12 +4,14 @@ import LogoDark from "../../../public/assets/logos/logo__dark.svg";
 import { Button } from "@/components/ui/button";
 import { Sun } from "lucide-react";
 import Link from "next/link";
-import { currentUser } from "@clerk/nextjs/server";
+import type { UserResource } from "@clerk/types";
 import { SignOutButton } from "@clerk/nextjs";
 
-const NavbarTwo = async () => {
-  const user = await currentUser();
+interface NavbarPageProps {
+  user: UserResource | null | undefined;
+}
 
+const NavbarTwo = ({ user }: NavbarPageProps) => {
   return (
     <>
       <nav className="border-b border-gray-100">
@@ -25,7 +27,7 @@ const NavbarTwo = async () => {
           </div>
           <div className="flex items-center gap-4">
             <div className="hidden md:block">
-              <p className="text-balance text-sm">Welcome, {user?.fullName}</p>
+              <p className="text-balance text-sm">Welcome, {user?.firstName}</p>
             </div>
             <Button variant={"outline"} className="cursor-pointer">
               <Sun />

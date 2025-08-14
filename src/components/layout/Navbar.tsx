@@ -4,12 +4,14 @@ import LogoDark from "../../../public/assets/logos/logo__dark.svg";
 import { Button } from "@/components/ui/button";
 // import { Sun } from "lucide-react";
 import Link from "next/link";
-import { currentUser } from "@clerk/nextjs/server";
 import { SignOutButton } from "@clerk/nextjs";
+import type { UserResource } from "@clerk/types";
 
-const Navbar = async () => {
-  const user = await currentUser();
+interface NavbarPageProps {
+  user: UserResource | null | undefined;
+}
 
+const Navbar = ({ user }: NavbarPageProps) => {
   return (
     <>
       <nav className="border-b border-gray-100">

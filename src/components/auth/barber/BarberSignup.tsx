@@ -17,7 +17,7 @@ const BarberSignup = () => {
   const router = useRouter();
 
   const searchParams = useSearchParams();
-  const redirectUrl = searchParams.get("redirect_url") || "/";
+  // const redirectUrl = searchParams.get("redirect_url") || "/";
 
   const [shopName, setShopName] = useState("");
   const [mobileNumber, setMobileNumber] = useState("");
@@ -88,7 +88,7 @@ const BarberSignup = () => {
           createdAt: new Date().toISOString(),
         });
 
-        router.push(redirectUrl);
+        router.push("/");
       } else {
         console.error(
           "Verification incomplete:",
@@ -234,7 +234,7 @@ const BarberSignup = () => {
           <div className="text-center text-sm">
             Already have an account?{" "}
             <Link
-              href="/auth/sign-in?redirect_url=http%3A%2F%2Flocalhost%3A3000%2Fdashboard%2Fbarber"
+              href="/auth/sign-in?barber"
               className="underline underline-offset-4"
             >
               Login
