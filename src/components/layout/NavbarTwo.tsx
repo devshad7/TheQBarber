@@ -4,14 +4,10 @@ import LogoDark from "../../../public/assets/logos/logo__dark.svg";
 import { Button } from "@/components/ui/button";
 import { Sun } from "lucide-react";
 import Link from "next/link";
-import type { UserResource } from "@clerk/types";
-import { SignOutButton } from "@clerk/nextjs";
+import { SignOutButton, useUser } from "@clerk/nextjs";
 
-interface NavbarPageProps {
-  user: UserResource | null | undefined;
-}
-
-const NavbarTwo = ({ user }: NavbarPageProps) => {
+const NavbarTwo = () => {
+  const { user } = useUser();
   return (
     <>
       <nav className="border-b border-gray-100">

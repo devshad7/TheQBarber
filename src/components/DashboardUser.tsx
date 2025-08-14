@@ -9,6 +9,8 @@ import { collection, getDocs } from "firebase/firestore";
 import { db } from "@/config/firebase.config";
 import getShopDistance from "@/utils/get-shop-distance";
 import { ShopDataProps } from "@/types/shop_data";
+import SearchBar from "./ui/searchBar";
+import Link from "next/link";
 
 const DashboardUser = () => {
   const [shopData, setShopData] = useState<ShopDataProps[]>([]);
@@ -79,15 +81,15 @@ const DashboardUser = () => {
     }
   };
 
-  // handler for smanual refresh
+  // handler for manual refresh
   const handleRefresh = () => {
     fetchNearbyShops();
   };
 
   return (
     <>
-      <main className="max-w-7xl mx-auto py-5 px-5">
-        <div className="flex justify-between items-center pb-5 border-b border-gray-100">
+      <main className="max-w-7xl mx-auto pt-2 pb-5 px-5">
+        {/* <div className="flex justify-between items-center pb-5 border-b border-gray-100">
           <div>
             <h1 className="text-xl md:text-2xl font-semibold">
               Nearby Barbers
@@ -108,8 +110,15 @@ const DashboardUser = () => {
               Refresh
             </Button>
           </div>
-        </div>
+        </div> */}
+        <SearchBar />
         <div className="mt-5">
+          <div className="flex justify-between items-center mb-4">
+            <h2 className="text-lg font-semibold">Nearby Location</h2>
+            <Link href={""} className="text-sm text-yellow-600 font-semibold">
+              See All
+            </Link>
+          </div>
           {loading ? (
             <div className="flex flex-col items-center justify-center h-[400px]">
               <div className="animate-spin">

@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Loader2 } from "lucide-react";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useAuth, useUser } from "@clerk/nextjs";
@@ -11,6 +11,7 @@ import DashboardBarber from "./DashboardBarber";
 import DashboardUser from "./DashboardUser";
 import Navbar from "./layout/Navbar";
 import NavbarTwo from "./layout/NavbarTwo";
+import Footer from "./layout/Footer";
 
 const Home = () => {
   const { isSignedIn, isLoaded, sessionClaims } = useAuth();
@@ -66,21 +67,20 @@ const HomeSplash = () => {
 };
 
 const BarberDashboard = () => {
-  const { user } = useUser();
   return (
     <>
-      <NavbarTwo user={user} />
+      <NavbarTwo />
       <DashboardBarber />
     </>
   );
 };
 
 const UserDashboard = () => {
-  const { user } = useUser();
   return (
     <>
-      <Navbar user={user} />
+      <Navbar />
       <DashboardUser />
+      <Footer />
     </>
   );
 };
