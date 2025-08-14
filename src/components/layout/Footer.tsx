@@ -1,6 +1,11 @@
-"use client"
+"use client";
 
-import { House, Map, MessageSquareText, UserRound } from "lucide-react";
+import {
+  House,
+  Map,
+  Scissors,
+  UserRound,
+} from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React from "react";
@@ -9,7 +14,7 @@ const Footer = () => {
   const pathname = usePathname();
 
   return (
-    <footer className="fixed left-0 bottom-0 shadow-[0_-1px_5px_rgba(0,0,0,0.05)] text-center py-4 w-full z-50">
+    <footer className="fixed left-0 bottom-0 bg-white shadow-[0_-1px_5px_rgba(0,0,0,0.05)] text-center pt-4 pb-6 w-full z-50">
       <div className="max-w-7xl mx-auto px-5">
         <div className="flex justify-around items-center text-gray-400">
           <Link
@@ -35,15 +40,15 @@ const Footer = () => {
             <span className="font-semibold">Explore</span>
           </Link>
           <Link
-            href={"/dashboard/messages"}
+            href={"/dashboard/bookings"}
             className={
-              pathname === "/dashboard/messages"
+              pathname === "/dashboard/bookings"
                 ? "flex flex-col items-center text-xs text-yellow-600"
                 : "flex flex-col items-center text-xs"
             }
           >
-            <MessageSquareText />
-            <span className="font-semibold">Message</span>
+            <Scissors />
+            <span className="font-semibold">Bookings</span>
           </Link>
           <Link
             href={"/dashboard/account"}

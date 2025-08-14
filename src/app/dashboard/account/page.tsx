@@ -1,12 +1,11 @@
+import Account from "@/components/layout/account/Account";
 import Footer from "@/components/layout/Footer";
 import React from "react";
 
 function Page() {
   return (
     <>
-      <div className="min-h-screen w-full flex justify-center items-center">
-        503 | Under Construction
-      </div>
+      <Account />
       <Footer />
     </>
   );
