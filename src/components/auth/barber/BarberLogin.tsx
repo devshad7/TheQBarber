@@ -14,9 +14,8 @@ const BarberLogin = () => {
   const { isLoaded, signIn, setActive } = useSignIn();
   const router = useRouter();
 
-  // Capture the 'redirect_url' query parameter
   const searchParams = useSearchParams();
-  const redirectUrl = searchParams.get("redirect_url") || "/";
+  // const redirectUrl = searchParams.get("redirect_url") || "/";
 
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
@@ -54,7 +53,7 @@ const BarberLogin = () => {
 
       if (result.status === "complete") {
         await setActive({ session: result.createdSessionId });
-        router.push(redirectUrl);
+        router.push("/");
       } else {
         setError("OTP verification incomplete.");
       }

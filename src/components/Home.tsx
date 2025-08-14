@@ -5,10 +5,12 @@ import { ArrowRight, Loader2 } from "lucide-react";
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { useAuth } from "@clerk/nextjs";
+import { useAuth, useUser } from "@clerk/nextjs";
 import { Roles } from "@/types/globals";
 import DashboardBarber from "./DashboardBarber";
 import DashboardUser from "./DashboardUser";
+import Navbar from "./layout/Navbar";
+import NavbarTwo from "./layout/NavbarTwo";
 
 const Home = () => {
   const { isSignedIn, isLoaded, sessionClaims } = useAuth();
@@ -48,10 +50,10 @@ const HomeSplash = () => {
             Skip the Wait <br /> Book Your Barbershop Spot!
           </h2>
           <div className="mt-6 flex flex-col gap-2 w-full">
-            <Link href={"/dashboard/user"}>
+            <Link href={"/auth/sign-in?user"}>
               <Button className="w-full py-5">Join a Queue</Button>
             </Link>
-            <Link href={"/dashboard/barber"}>
+            <Link href={"/auth/sign-in?barber"}>
               <Button className="w-full py-5" variant={"secondary"}>
                 Continue as a Barber <ArrowRight className="h-4 w-4" />
               </Button>
@@ -64,16 +66,20 @@ const HomeSplash = () => {
 };
 
 const BarberDashboard = () => {
+  const { user } = useUser();
   return (
     <>
+      <NavbarTwo user={user} />
       <DashboardBarber />
     </>
   );
 };
 
 const UserDashboard = () => {
+  const { user } = useUser();
   return (
     <>
+      <Navbar user={user} />
       <DashboardUser />
     </>
   );
