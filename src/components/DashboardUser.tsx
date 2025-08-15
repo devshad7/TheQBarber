@@ -112,7 +112,7 @@ const DashboardUser = () => {
           </div>
         </div> */}
         <SearchBar />
-        <div className="mt-5">
+        <div className="mt-5 pb-20">
           <div className="flex justify-between items-center mb-4">
             <h2 className="text-lg font-semibold">Nearby Location</h2>
             <Link href={""} className="text-sm text-yellow-600 font-semibold">
