@@ -1,11 +1,6 @@
 "use client";
 
-import {
-  House,
-  Map,
-  Scissors,
-  UserRound,
-} from "lucide-react";
+import { House, Map, Scissors, UserRound } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React from "react";
@@ -53,7 +48,7 @@ const Footer = () => {
           <Link
             href={"/dashboard/account"}
             className={
-              pathname === "/dashboard/account"
+              pathname.startsWith("/dashboard/account")
                 ? "flex flex-col items-center text-xs text-yellow-600"
                 : "flex flex-col items-center text-xs"
             }
