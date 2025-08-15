@@ -33,7 +33,7 @@ const Account = () => {
   const { user } = useUser();
   //   console.log(user);
   return (
-    <div className="max-w-7xl mx-auto px-4 pt-6 pb-8">
+    <div className="max-w-7xl mx-auto px-4 pt-6 pb-20">
       <div className="flex items-center gap-4 pb-4">
         <Avatar className="w-[60px] h-[60px]">
           <AvatarImage src={user?.imageUrl} alt="user_image" />
