@@ -49,7 +49,10 @@ const Account = () => {
       <div className="py-4">
         <span className="text-sm text-gray-600">Personal Info</span>
         <div className="space-y-5 mt-4 text-gray-600">
-          <Link href={""} className="flex items-center justify-between">
+          <Link
+            href={"/dashboard/account/profile"}
+            className="flex items-center justify-between"
+          >
             <div className="flex items-center gap-4">
               <UserRound />
               <span>Personal Data</span>
