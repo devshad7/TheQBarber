@@ -9,6 +9,12 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { useSignIn } from "@clerk/nextjs";
 import { useRouter, useSearchParams } from "next/navigation";
+import {
+  InputOTP,
+  InputOTPGroup,
+  InputOTPSlot,
+} from "@/components/ui/input-otp";
+import { REGEXP_ONLY_DIGITS } from "input-otp";
 
 const UserLogin = () => {
   const { isLoaded, signIn, setActive } = useSignIn();
@@ -112,13 +118,37 @@ const UserLogin = () => {
               <>
                 <div className="grid gap-2">
                   <Label htmlFor="code">Enter OTP</Label>
-                  <Input
-                    id="code"
-                    type="text"
-                    placeholder="Verification code"
+                  <InputOTP
+                    maxLength={6}
+                    pattern={REGEXP_ONLY_DIGITS}
                     value={code}
-                    onChange={(e) => setCode(e.target.value)}
-                  />
+                    onChange={(value) => setCode(value)}
+                  >
+                    <InputOTPSlot
+                      index={0}
+                      className="rounded-sm shadow-none border border-gray-200 w-full py-5 text-base"
+                    />
+                    <InputOTPSlot
+                      index={1}
+                      className="rounded-sm shadow-none border border-gray-200 w-full py-5"
+                    />
+                    <InputOTPSlot
+                      index={2}
+                      className="rounded-sm shadow-none border border-gray-200 w-full py-5"
+                    />
+                    <InputOTPSlot
+                      index={3}
+                      className="rounded-sm shadow-none border border-gray-200 w-full py-5"
+                    />
+                    <InputOTPSlot
+                      index={4}
+                      className="rounded-sm shadow-none border border-gray-200 w-full py-5"
+                    />
+                    <InputOTPSlot
+                      index={5}
+                      className="rounded-sm shadow-none border border-gray-200 w-full py-5"
+                    />
+                  </InputOTP>
                 </div>
                 <div id="clerk-captcha" className="hidden"></div>
                 <Button
