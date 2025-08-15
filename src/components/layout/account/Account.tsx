@@ -13,7 +13,7 @@ import {
   DrawerTrigger,
 } from "@/components/ui/drawer";
 import { Separator } from "@/components/ui/separator";
-import { useUser } from "@clerk/nextjs";
+import { SignOutButton, useUser } from "@clerk/nextjs";
 import {
   Bell,
   ChevronRight,
@@ -144,9 +144,11 @@ const Account = () => {
                     Cancel
                   </span>
                 </DrawerClose>
-                <span className="px-4 w-full py-2 flex rounded-full justify-center items-center border bg-rose-700 text-white">
-                  Logout
-                </span>
+                <SignOutButton>
+                  <span className="px-4 w-full py-2 flex rounded-full justify-center items-center border bg-rose-700 text-white">
+                    Logout
+                  </span>
+                </SignOutButton>
               </DrawerFooter>
             </DrawerContent>
           </Drawer>
