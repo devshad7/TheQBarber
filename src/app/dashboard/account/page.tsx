@@ -6,7 +6,7 @@ function Page() {
   return (
     <>
       <Account />
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 }

@@ -80,7 +80,7 @@ const UserDashboard = () => {
     <>
       <Navbar />
       <DashboardUser />
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 };
