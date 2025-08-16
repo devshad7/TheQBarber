@@ -1,13 +1,14 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
-import Head from "next/head";
+import Footer from "@/components/layout/Footer";
+import { PageTransition } from "@/components/PageTransition";
 
 export const metadata: Metadata = {
   title: "TheQBarber | Smart Queue & Appointment System for Barbershops",
   description:
     "TheQBarber is an online barber queue and appointment booking system. Manage walk-ins, reduce wait times, and streamline your barbershop experience.",
-    manifest: "/manifest.json",
+  manifest: "/manifest.json",
 };
 
 export default function RootLayout({
@@ -19,7 +20,8 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en">
         <body className="text-[#363636]" suppressHydrationWarning>
-          {children}
+          <PageTransition>{children}</PageTransition>
+          <Footer />
         </body>
       </html>
     </ClerkProvider>
