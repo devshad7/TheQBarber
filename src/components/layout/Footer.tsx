@@ -9,7 +9,13 @@ const Footer = () => {
   const pathname = usePathname();
 
   return (
-    <footer className="fixed left-0 bottom-0 bg-white shadow-[0_-1px_5px_rgba(0,0,0,0.05)] text-center pt-4 pb-8 w-full z-50">
+    <footer
+      className={
+        pathname === "/dashboard/explore"
+          ? "fixed left-0 bottom-0 bg-white shadow-[0_-1px_5px_rgba(0,0,0,0.05)] text-center pt-4 pb-8 w-full z-[9999]"
+          : "fixed left-0 bottom-0 bg-white shadow-[0_-1px_5px_rgba(0,0,0,0.05)] text-center pt-4 pb-8 w-full z-50"
+      }
+    >
       <div className="max-w-7xl mx-auto px-5">
         <div className="flex justify-around items-center text-gray-400">
           <Link

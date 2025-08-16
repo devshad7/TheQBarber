@@ -6,7 +6,7 @@ function Page() {
   return (
     <>
       <Profile />
-      {/* <Footer /> */}
+      <Footer />
     </>
   );
 }

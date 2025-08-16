@@ -128,7 +128,7 @@ const Account = () => {
                 <ChevronRight />
               </div>
             </DrawerTrigger>
-            <DrawerContent className="pb-6">
+            <DrawerContent className="pb-6 z-[9999]">
               <DrawerHeader>
                 <DrawerTitle className="text-destructive">Logout</DrawerTitle>
                 <Separator className="my-4" />
