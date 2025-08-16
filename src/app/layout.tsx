@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
-import Footer from "@/components/layout/Footer";
-import { PageTransition } from "@/components/PageTransition";
 
 export const metadata: Metadata = {
   title: "TheQBarber | Smart Queue & Appointment System for Barbershops",
@@ -20,8 +18,7 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en">
         <body className="text-[#363636]" suppressHydrationWarning>
-          <PageTransition>{children}</PageTransition>
-          <Footer />
+          {children}
         </body>
       </html>
     </ClerkProvider>
