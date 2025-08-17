@@ -1,11 +1,13 @@
 import Footer from "@/components/layout/Footer";
 import Haircut from "@/components/layout/haircut/Haircut";
-import React from "react";
+import React, { Suspense } from "react";
 
 function Page() {
   return (
     <>
-      <Haircut />
+      <Suspense fallback={<div>Loading...</div>}>
+        <Haircut />
+      </Suspense>
       <Footer />
     </>
   );
