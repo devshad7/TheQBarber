@@ -36,7 +36,7 @@ const Account = () => {
     <div className="max-w-7xl mx-auto px-4 pt-6 pb-20">
       <div className="flex items-center gap-4 pb-4">
         <Avatar className="w-[60px] h-[60px]">
-          <AvatarImage src={user?.imageUrl} alt="user_image" />
+          <AvatarImage src={user?.imageUrl} alt="user_image" className="h-full w-full object-cover" />
           <AvatarFallback>CN</AvatarFallback>
         </Avatar>
         <div className="">
