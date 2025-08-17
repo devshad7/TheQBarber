@@ -99,7 +99,7 @@ const InQueue = ({
           </Card>
         </div>
       </CardContent>
-      <CardFooter className="grid grid-cols-1 md:grid-cols-2 gap-4 md:pb-4 bg-muted/30">
+      <CardFooter className="grid grid-cols-1 md:grid-cols-2 gap-2 md:pb-4 bg-muted/30">
         <Button size="lg" variant="outline" className="py-5 cursor-pointer">
           <Link
             href={`https://www.google.com/maps/dir/?api=1&destination=${location?.latitude},${location?.longitude}`}
@@ -112,8 +112,7 @@ const InQueue = ({
         </Button>
         <Button
           size="lg"
-          variant="destructive"
-          className="py-5 cursor-pointer"
+          className="py-5 cursor-pointer bg-yellow-700 hover:bg-yellow-800"
           onClick={handleQueueDone}
         >
           <LogOut className="h-4 w-4" />

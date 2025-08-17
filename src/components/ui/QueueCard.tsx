@@ -198,9 +198,9 @@ const QueueCard = ({ shopData }: QueueCardProps) => {
                     </span>
                   </div>
                 </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                <div className="grid grid-cols-2 gap-2">
                   <Button
-                    className="bg-[#363636] hover:bg-[#414141] cursor-pointer text-white font-bold py-5"
+                    className="bg-yellow-700 hover:bg-yellow-800 cursor-pointer text-white font-bold py-5 w-full"
                     onClick={() => setModalShopId(shop.id)}
                   >
                     <Plus className="w-5 h-5" />
@@ -208,7 +208,7 @@ const QueueCard = ({ shopData }: QueueCardProps) => {
                   </Button>
                   <Button
                     variant="outline"
-                    className="font-bold border-gray-300 bg-transparent py-5 cursor-pointer"
+                    className="font-bold border-gray-200 bg-transparent py-5 cursor-pointer w-full"
                   >
                     <Link
                       href={`https://www.google.com/maps/dir/?api=1&destination=${Number(
