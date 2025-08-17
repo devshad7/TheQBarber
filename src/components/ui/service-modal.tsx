@@ -2,17 +2,10 @@
 
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogDescription,
-  DialogFooter,
-} from "@/components/ui/dialog";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { cn } from "@/lib/utils";
+import { ArrowLeft } from "lucide-react";
 
 const services = [
   {
@@ -50,17 +43,32 @@ export function ServiceModal({
     { id: string; duration: string } | undefined
   >(undefined);
 
+  if (!isOpen) return null;
+
   return (
-    <Dialog open={isOpen} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-[480px]">
-        <DialogHeader>
-          <DialogTitle className="text-2xl font-bold text-center">
-            Choose Your Service
-          </DialogTitle>
-          <DialogDescription className="text-center">
-            Select the service you want from The Unisex Saloon
-          </DialogDescription>
-        </DialogHeader>
+    <div className="w-full h-screen absolute bg-white top-0 left-0 z-[9999]">
+      <div className="max-w-7xl mx-auto px-4 pt-6 pb-20">
+        <div className="mb-8 flex justify-between items-center">
+          <Button
+            variant="ghost"
+            size="icon"
+            className="rounded-full bg-white shadow-sm"
+            onClick={() => onOpenChange(false)}
+          >
+            <ArrowLeft />
+          </Button>
+          <h1 className="text-lg font-semibold text-gray-700">Our Services</h1>
+          <Button
+            variant="ghost"
+            size="icon"
+            className="rounded-full bg-white shadow-sm invisible"
+          >
+            <ArrowLeft />
+          </Button>
+        </div>
+        <div className="">
+          <h2 className="text-lg font-semibold text-gray-700">Our Services</h2>
+        </div>
         <div className="py-4">
           <RadioGroup
             value={selectedService?.id}
@@ -77,15 +85,15 @@ export function ServiceModal({
                 className={cn(
                   "flex items-center justify-between rounded-lg border bg-white p-4 cursor-pointer transition-all",
                   selectedService?.id === service.id
-                    ? "border-blue-500 ring-2 ring-blue-500"
+                    ? "border-yellow-500 ring-yellow-500"
                     : "border-gray-200"
                 )}
               >
                 <div>
                   <div className="flex items-center space-x-3 mb-1">
                     <p className="font-semibold">{service.name}</p>
-                    <div className="bg-blue-100 text-blue-600 text-xs font-medium px-2.5 py-0.5 rounded-full">
-                      {service.duration}
+                    <div className="bg-yellow-100 text-yellow-600 text-xs font-medium px-2.5 py-0.5 rounded-full">
+                      {service.duration} min
                     </div>
                   </div>
                   <p className="text-sm text-muted-foreground">
@@ -97,22 +105,24 @@ export function ServiceModal({
             ))}
           </RadioGroup>
         </div>
-        <DialogFooter className="grid grid-cols-2 gap-3">
-          <Button variant="outline" onClick={() => onOpenChange(false)}>
-            Cancel
-          </Button>
-          <Button
-            className="bg-blue-600 hover:bg-blue-700 text-white"
-            onClick={() => {
-              if (selectedService)
-                handleAddQueue(selectedService.id, selectedService.duration);
-            }}
-            disabled={!selectedService}
-          >
-            Join Queue
-          </Button>
-        </DialogFooter>
-      </DialogContent>
-    </Dialog>
+        <div className="absolute bottom-0 pb-8 left-4 right-4">
+          <div className="flex flex-col gap-2 mt-6">
+            <Button variant="outline" onClick={() => onOpenChange(false)} className="py-5">
+              Cancel
+            </Button>
+            <Button
+              className="bg-yellow-700 hover:bg-yellow-700 text-white py-5"
+              onClick={() => {
+                if (selectedService)
+                  handleAddQueue(selectedService.id, selectedService.duration);
+              }}
+              disabled={!selectedService}
+            >
+              Join Queue
+            </Button>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }

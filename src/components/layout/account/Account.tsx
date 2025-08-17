@@ -9,6 +9,7 @@ import {
   DrawerDescription,
   DrawerFooter,
   DrawerHeader,
+  DrawerOverlay,
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer";
@@ -36,7 +37,11 @@ const Account = () => {
     <div className="max-w-7xl mx-auto px-4 pt-6 pb-20">
       <div className="flex items-center gap-4 pb-4">
         <Avatar className="w-[60px] h-[60px]">
-          <AvatarImage src={user?.imageUrl} alt="user_image" className="h-full w-full object-cover" />
+          <AvatarImage
+            src={user?.imageUrl}
+            alt="user_image"
+            className="h-full w-full object-cover"
+          />
           <AvatarFallback>CN</AvatarFallback>
         </Avatar>
         <div className="">
@@ -128,9 +133,12 @@ const Account = () => {
                 <ChevronRight />
               </div>
             </DrawerTrigger>
-            <DrawerContent className="pb-6 z-[9999]">
+            <DrawerContent
+              className="pb-6 z-[9999]"
+              overlayClassName="backdrop-blur-md bg-transparent"
+            >
               <DrawerHeader>
-                <DrawerTitle className="text-destructive">Logout</DrawerTitle>
+                <DrawerTitle className="text-yellow-800">Logout</DrawerTitle>
                 <Separator className="my-4" />
                 <DrawerDescription className="flex flex-col">
                   <span className="text-base font-semibold text-[#363636]">
@@ -148,7 +156,7 @@ const Account = () => {
                   </span>
                 </DrawerClose>
                 <SignOutButton>
-                  <span className="px-4 w-full py-2 flex rounded-full justify-center items-center border bg-rose-700 text-white">
+                  <span className="px-4 w-full py-2 flex rounded-full justify-center items-center border bg-yellow-700 hover:bg-yellow-800 text-white">
                     Logout
                   </span>
                 </SignOutButton>

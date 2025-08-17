@@ -124,7 +124,7 @@ const Profile = () => {
           </div>
           <Button
             size="icon"
-            className="absolute -bottom-1 -right-1 h-8 w-8 rounded-full bg-orange-500 hover:bg-orange-600"
+            className="absolute -bottom-1 -right-1 h-8 w-8 rounded-full bg-yellow-700 hover:bg-yellow-800"
             onClick={triggerPhotoUpload}
           >
             <Edit className="h-4 w-4 text-white" />
@@ -141,7 +141,6 @@ const Profile = () => {
 
       {/* User Details */}
       <div className="space-y-6">
-        {/* First Name and Last Name */}
         <div className="flex items-center gap-x-3">
           <div className="space-y-2">
             <Label
@@ -154,7 +153,7 @@ const Profile = () => {
               id="firstName"
               value={userFirstName}
               onChange={(e) => setUserFirstName(e.target.value)}
-              className="py-5 border-gray-200 bg-white text-gray-900"
+              className="py-5 border-gray-200 bg-white text-gray-900 focus-visible:ring-0"
             />
           </div>
           <div className="space-y-2">
@@ -168,7 +167,7 @@ const Profile = () => {
               id="lastName"
               value={userLastName}
               onChange={(e) => setUserLastName(e.target.value)}
-              className="py-5 border-gray-200 bg-white text-gray-900"
+              className="py-5 border-gray-200 bg-white text-gray-900 focus-visible:ring-0"
             />
           </div>
         </div>
@@ -183,7 +182,7 @@ const Profile = () => {
             type="email"
             disabled
             defaultValue={user?.emailAddresses[0]?.emailAddress || ""}
-            className="py-5 border-gray-200 bg-white text-gray-900"
+            className="py-5 border-gray-200 bg-white text-gray-900 focus-visible:ring-0"
           />
         </div>
 
@@ -213,7 +212,7 @@ const Profile = () => {
       {/* Save Button */}
       <div className="mt-8">
         <Button
-          className="w-full py-5 bg-orange-500 text-white hover:bg-orange-600 disabled:opacity-50 disabled:cursor-not-allowed"
+          className="w-full py-5 bg-yellow-700 text-white hover:bg-yellow-800 disabled:opacity-50 disabled:cursor-not-allowed"
           onClick={handleSaveChanges}
           disabled={isLoading || !hasChanges}
         >

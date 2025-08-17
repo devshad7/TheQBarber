@@ -46,7 +46,7 @@ export default function ShopDrawer({
               Close
             </span>
           </DrawerClose>
-          <button className="px-4 w-full py-2 flex rounded-full justify-center items-center border bg-rose-700 text-white">
+          <button className="px-4 w-full py-2 flex rounded-full justify-center items-center border bg-yellow-700 hover:bg-yellow-800 text-white">
             Navigate
           </button>
         </DrawerFooter>
