@@ -41,15 +41,15 @@ const Footer = () => {
             <span className="font-semibold">Explore</span>
           </Link>
           <Link
-            href={"/dashboard/bookings"}
+            href={"/dashboard/haircut"}
             className={
-              pathname === "/dashboard/bookings"
+              pathname === "/dashboard/haircut"
                 ? "flex flex-col items-center text-xs text-yellow-600"
                 : "flex flex-col items-center text-xs"
             }
           >
             <Scissors />
-            <span className="font-semibold">Bookings</span>
+            <span className="font-semibold">Haircut</span>
           </Link>
           <Link
             href={"/dashboard/account"}
