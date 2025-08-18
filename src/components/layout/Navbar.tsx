@@ -1,8 +1,9 @@
-"use client"
+"use client";
 
 import React, { useEffect, useState } from "react";
 import { Bell, MapPin } from "lucide-react";
 import { useUser } from "@clerk/nextjs";
+import Link from "next/link";
 
 const Navbar = () => {
   const { user } = useUser();
@@ -57,9 +58,11 @@ const Navbar = () => {
             </p>
           </div>
           <div className="">
-            <div className="bg-gray-50 border border-gray-200 p-2 rounded-full">
-              <Bell />
-            </div>
+            <Link href={"/dashboard/notification"}>
+              <div className="bg-gray-50 border border-gray-200 p-2 rounded-full">
+                <Bell />
+              </div>
+            </Link>
           </div>
         </div>
       </nav>
