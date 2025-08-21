@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { Button } from "./ui/button";
-import { Loader2, MapPinOff, RefreshCcw, Scissors } from "lucide-react";
+import { Loader2, MapPinOff, Scissors } from "lucide-react";
 import QueueCard from "./ui/QueueCard";
 import { Card, CardContent } from "./ui/card";
 import { collection, getDocs } from "firebase/firestore";
@@ -11,8 +11,11 @@ import getShopDistance from "@/utils/get-shop-distance";
 import { ShopDataProps } from "@/types/shop_data";
 import SearchBar from "./ui/searchBar";
 import Link from "next/link";
+import { useAuth } from "@clerk/nextjs";
+import InQueue from "./ui/InQueue";
 
 const DashboardUser = () => {
+  const { userId } = useAuth();
   const [shopData, setShopData] = useState<ShopDataProps[]>([]);
   const [isLocationPermissionAllowed, setIsLocationPermissionAllowed] =
     useState<boolean>(false);
@@ -47,10 +50,9 @@ const DashboardUser = () => {
           const distance = getShopDistance(userLat, userLng, lat, lng);
           return { ...shop, distance };
         })
-        .filter((shop) => shop && shop.distance <= 1);
+        .filter((shop) => shop && shop.distance <= 2);
 
       setShopData(nearbyShops);
-      // console.log(nearbyShops);
     } catch (err) {
       setIsLocationPermissionAllowed(false);
       setShopData([]);
@@ -71,7 +73,7 @@ const DashboardUser = () => {
           setIsLocationPermissionAllowed(true);
           fetchNearbyShops(position);
         },
-        (error) => {
+        () => {
           setIsLocationPermissionAllowed(false);
           setLoading(false);
         }
@@ -81,37 +83,14 @@ const DashboardUser = () => {
     }
   };
 
-  // handler for manual refresh
-  const handleRefresh = () => {
-    fetchNearbyShops();
-  };
-
   return (
     <>
       <main className="max-w-7xl mx-auto pt-2 pb-5 px-5">
-        {/* <div className="flex justify-between items-center pb-5 border-b border-gray-100">
-          <div>
-            <h1 className="text-xl md:text-2xl font-semibold">
-              Nearby Barbers
-            </h1>
-            <p className="text-gray-600 text-sm md:text-base text-balance">
-              {shopData.length} barber{shopData.length === 1 ? "" : "s"} found •
-              Queue lengths update every 30 seconds
-            </p>
-          </div>
-          <div>
-            <Button
-              variant={"outline"}
-              className="cursor-pointer"
-              onClick={handleRefresh}
-              disabled={loading}
-            >
-              <RefreshCcw className={loading ? "animate-spin" : ""} />
-              Refresh
-            </Button>
-          </div>
-        </div> */}
         <SearchBar />
+        <div className="mt-5">
+          <InQueue userId={userId} />
+        </div>
+
         <div className="mt-5 pb-20">
           <div className="flex justify-between items-center mb-4">
             <h2 className="text-lg font-semibold">Nearby Location</h2>

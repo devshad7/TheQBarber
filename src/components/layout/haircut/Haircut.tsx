@@ -5,11 +5,10 @@ import { Badge } from "@/components/ui/badge";
 import SearchBar from "@/components/ui/searchBar";
 import { categories, haircuts } from "@/data/haircuts";
 import Link from "next/link";
-import { usePathname, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
 const Haircut = () => {
-  const pathname = usePathname();
   const searchParams = useSearchParams();
   const type = searchParams.get("type");
   const [filteredHaircuts, setFilteredHaircuts] = useState(haircuts);
