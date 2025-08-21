@@ -1,7 +1,6 @@
-import React from "react";
-import { Card, CardContent } from "./card";
+import React, { useEffect } from "react";
+import { Card, CardContent } from "../../ui/card";
 import { useUserQueue } from "@/hooks/useUserQueue";
-import Link from "next/link";
 import {
   Drawer,
   DrawerClose,
@@ -11,32 +10,43 @@ import {
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
-} from "./drawer";
-import { Separator } from "./separator";
+} from "../../ui/drawer";
+import { Separator } from "../../ui/separator";
 import { formatWaitTime } from "@/hooks/useFormatWaitTime";
 import { handleQueueDone } from "@/hooks/useCancelBooking";
 
-const InQueue = ({ userId }: { userId: string | null | undefined }) => {
+const InQueue = ({
+  userId,
+  type,
+}: {
+  userId: string | null | undefined;
+  type: string | null;
+}) => {
   const userQueue = useUserQueue(userId);
 
   if (!userQueue || userQueue.length === 0) {
     return null;
   }
 
+  if (type !== "upcoming") {
+    if (type === "completed") {
+      return (
+        <>
+          <p className="text-center">No completed bookings found</p>
+        </>
+      );
+    } else if (type === "cancelled") {
+      return (
+        <>
+          <p className="text-center">No cancelled bookings found</p>
+        </>
+      );
+    }
+  }
+
   return (
-    <>
-      <div className="flex justify-between items-center mb-4">
-        <h2 className="text-lg font-semibold">
-          Current Bookings ({userQueue.length})
-        </h2>
-        <Link
-          href={"/dashboard/booking?type=upcoming"}
-          className="text-sm text-yellow-600 font-semibold"
-        >
-          See All
-        </Link>
-      </div>
-      {userQueue.slice(0, 1).map((data) => (
+    <div className="space-y-4">
+      {userQueue.map((data) => (
         <Card
           className="w-full border border-yellow-700 bg-yellow-50"
           key={data.barber_shop.id}
@@ -103,7 +113,7 @@ const InQueue = ({ userId }: { userId: string | null | undefined }) => {
           </CardContent>
         </Card>
       ))}
-    </>
+    </div>
   );
 };
 
