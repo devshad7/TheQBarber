@@ -28,6 +28,22 @@ const BarberLogin = () => {
     setLoading(true);
     setError("");
     try {
+      // check for the barber's role
+      const response = await fetch(`/api/check-barber-role?email=${email}`);
+      const data = await response.json();
+
+      if (!data?.allowed) {
+        if (data.reason === "not_found") {
+          setError("Couldn't find your account.");
+        } else if (data.reason === "invalid_role") {
+          setError("This account is not allowed to log in as Barber.");
+        } else {
+          setError("An error occurred while checking your role.");
+        }
+        setLoading(false);
+        return;
+      }
+
       await signIn.create({
         strategy: "email_code",
         identifier: email,
@@ -131,7 +147,7 @@ const BarberLogin = () => {
               </>
             )}
           </div>
-         <div className="text-center text-sm">
+          <div className="text-center text-sm">
             Need to register your barber shop?{" "}
             <Link
               href="mailto:theqbarber@gmail.com"
