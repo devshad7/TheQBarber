@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Card, CardContent } from "../../ui/card";
 import { useUserQueue } from "@/hooks/useUserQueue";
 import {
@@ -25,10 +25,15 @@ const InQueue = ({
   const userQueue = useUserQueue(userId);
 
   if (!userQueue || userQueue.length === 0) {
-    return null;
+    return (
+      <>
+        <p className="text-center">No bookings found</p>
+      </>
+    );
   }
 
   if (type !== "upcoming") {
+    //Todo: fix it to production level when the things are done
     if (type === "completed") {
       return (
         <>
