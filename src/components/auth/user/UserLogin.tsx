@@ -34,6 +34,22 @@ const UserLogin = () => {
     setLoading(true);
     setError("");
     try {
+      // check for the user's role
+      const response = await fetch(`/api/check-user-role?email=${email}`);
+      const data = await response.json();
+
+      if (!data?.allowed) {
+        if (data.reason === "not_found") {
+          setError("Couldn't find your account.");
+        } else if (data.reason === "invalid_role") {
+          setError("This account is not allowed to log in as User.");
+        } else {
+          setError("An error occurred while checking your role.");
+        }
+        setLoading(false);
+        return;
+      }
+
       await signIn.create({
         strategy: "email_code",
         identifier: email,
