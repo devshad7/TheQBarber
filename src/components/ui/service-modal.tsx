@@ -46,7 +46,7 @@ export function ServiceModal({
   if (!isOpen) return null;
 
   return (
-    <div className="w-full h-screen absolute bg-white top-0 left-0 z-[9999]">
+    <div className="w-full h-screen fixed bg-white top-0 left-0 z-[9999]">
       <div className="max-w-7xl mx-auto px-4 pt-6 pb-20">
         <div className="mb-8 flex justify-between items-center">
           <Button
@@ -107,7 +107,11 @@ export function ServiceModal({
         </div>
         <div className="absolute bottom-0 pb-8 left-4 right-4">
           <div className="flex flex-col gap-2 mt-6">
-            <Button variant="outline" onClick={() => onOpenChange(false)} className="py-5">
+            <Button
+              variant="outline"
+              onClick={() => onOpenChange(false)}
+              className="py-5"
+            >
               Cancel
             </Button>
             <Button
